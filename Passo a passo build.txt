@@ -1,0 +1,74 @@
+1. Faço o download do zip  https://drive.google.com/file/d/15SKa5GELdT0CYXC00LJOlmCTqp8PIBde/view?usp=sharing
+
+2. Descompactar a pasta
+
+3. Fique livre para renomear porem na aula usaremos esse caminho E:\projetoAnime\anime
+
+4. Faço instalação do Java na sua maquina estou usando esse :
+java version "17.0.8" 2023-07-18 LTS
+Java(TM) SE Runtime Environment (build 17.0.8+9-LTS-211)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.8+9-LTS-211, mixed mode, sharing)
+
+5.Java (JDK e JRE) Pré requisitos
+
+Instalar o Java Development Kit (JDK) e o Java Runtime Environment (JRE) através dos links abaixo:
+https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+https://www.oracle.com/java/technologies/downloads/#java17
+
+Atente para a versão, pois pode haver impactos na utilização do Hybris
+
+Para instalação no Linux, basta rodar o seguinte comando:
+sudo apt install openjdk-17-jdk
+Para alterar a versao utilize o comando
+sudo update-alternatives --config java
+
+Em alguns Computadores Pessoais, ocorre um erro no gerenciamento de memória no Java 17, esses comandos livrarão você, caso você tenha este problema 
+
+Windows
+set JAVA_TOOL_OPTIONS="--add-opens=java.base/java.utils=ALL-UNNAMED"
+set JAVA_TOOL_OPTIONS="--add-opens=java.base/java.lang=ALL-UNNAMED"
+set JAVA_TOOL_OPTIONS="--add-opens=java.base/java.io=ALL-UNNAMED"
+set JAVA_TOOL_OPTIONS="--add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED"
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+Linux
+export JAVA_TOOL_OPTIONS="--add-opens=java.base/java.utils=ALL-UNNAMED"
+export JAVA_TOOL_OPTIONS="--add-opens=java.base/java.lang=ALL-UNNAMED"
+export JAVA_TOOL_OPTIONS="--add-opens=java.base/java.io=ALL-UNNAMED"
+export JAVA_TOOL_OPTIONS="--add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED"
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+
+
+
+5. Não esqueça de setar as variaveis de ambiente do Java
+
+Configurar variáveis de ambiente conforme o sistema operacional:
+•	Windows: https://confluence.atlassian.com/confbr1/configurando-a-variavel-java_home-no-windows-933709538.html
+•	Linux: https://receitasdecodigo.com.br/ubuntu/como-configurar-java_home-para-java-no-ubuntu
+
+
+6. Iniciando o build: 
+
+ • Navegue até sua pasta plataform
+   cd E:\projetoAnime\anime\hybris\bin\platform
+
+ • Rode o comando abaixo 
+  Linux:
+  . ./setantenv.sh 
+  Windows:
+  setantenv.bat 
+
+  • Rode o comando abaixo 
+  ant clean all
+
+  • Rode o comando abaixo 
+  hybrisserver.bat debug
+
+  • Ou faça em uma unica linha de comando
+
+cd E:\projetoAnime\anime\hybris\bin\platform && E: && setantenv.bat && ant clean all && hybrisserver.bat debug
+
+IMPORTANTE, cada etapa deve dar build sucessfull!
+
+O processo de instalação acima foi simplicado! Se voçê se sentir confortavel com o hybris segue um exemplo de um processo completo de instalação:
+https://techwringer.com/

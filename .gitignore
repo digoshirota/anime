@@ -1,0 +1,12 @@
+/build-tools
+/hybris/config
+/hybris/data
+/hybris/log
+/hybris/roles
+/hybris/temp
+/hybris-sbg
+/installer
+/licenses
+!/hybris/bin/custom
+/hybris/bin/modules
+/hybris/bin/platform
