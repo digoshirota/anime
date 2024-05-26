@@ -1,4 +1,4 @@
-1. Faço o download do zip  https://drive.google.com/file/d/15SKa5GELdT0CYXC00LJOlmCTqp8PIBde/view?usp=sharing
+1. Faço o download do zip  https://drive.google.com/file/d/1qN4uKjTVAPstMQuMfkTCC7P2EE1kAfJY/view?usp=sharing
 
 2. Descompactar a pasta
 
@@ -69,6 +69,15 @@ Configurar variáveis de ambiente conforme o sistema operacional:
 cd E:\projetoAnime\anime\hybris\bin\platform && E: && setantenv.bat && ant clean all && hybrisserver.bat debug
 
 IMPORTANTE, cada etapa deve dar build sucessfull!
+
+7.Host File Entry
+Go to Directory: C:\Windows\System32\drivers\etc
+
+Abra o bloco de notas como administrador e adcione as linhas abaixo:
+
+127.0.0.1 electronics.local
+127.0.0.1 apparel-de.local
+127.0.0.1 apparel-uk.local
 
 O processo de instalação acima foi simplicado! Se voçê se sentir confortavel com o hybris segue um exemplo de um processo completo de instalação:
 https://techwringer.com/
