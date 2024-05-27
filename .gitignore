@@ -11,3 +11,4 @@
 /hybris/bin/modules
 /hybris/bin/platform
 hybris/bin/custom/myproject/myprojectstorefront/web/node_modules/*
+hybris/bin/custom/myproject/*/jalo/*

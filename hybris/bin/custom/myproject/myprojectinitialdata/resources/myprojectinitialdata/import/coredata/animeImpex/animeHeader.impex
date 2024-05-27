@@ -1,0 +1,31 @@
+##O que é um ImpEx?
+##ImpEx é uma ferramenta poderosa e versátil usada no SAP Commerce Hybris para importar e exportar dados para o sistema. O nome "ImpEx" vem da combinação de "Import" e "Export". A principal função do ImpEx é permitir que os administradores e desenvolvedores manipulem grandes volumes de dados de forma eficiente.
+
+#Características do ImpEx
+##Simplicidade e Flexibilidade: O ImpEx usa um formato de arquivo baseado em texto que pode ser facilmente editado e manipulado. Esses arquivos são geralmente escritos em uma sintaxe específica, semelhante a CSV, mas com algumas diferenças importantes.
+
+#Importação e Exportação de Dados: Com o ImpEx, você pode importar dados de arquivos externos para o SAP Commerce ou exportar dados do SAP Commerce para arquivos externos. Isso é útil para diversas tarefas, como migrações de dados, backups e integrações com outros sistemas.
+
+#Manipulação de Dados Complexos: O ImpEx permite manipular dados complexos, incluindo dados relacionados a produtos, categorias, clientes, pedidos, entre outros. Você pode definir relacionamentos entre diferentes tipos de dados no arquivo ImpEx.
+
+
+##Criação de uma nova página
+
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=pt
+
+# PageTemplate
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;LandingPageAnimeTemplate;Landing Page Template Anime;layout/landingLayoutAnimePage;CategoryPage,ContentPage;
+
+# Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];homepage[default='true'];label;approvalStatus(code)[default='approved'];masterTemplate(uid,$contentCV);name;defaultPage
+;;homepage-anime;Homepage da loja anime;;homepage;;LandingPageAnimeTemplate;Homepage;true
+
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];homepage[default='false'];approvalStatus(code)[default='unapproved'];defaultPage
+;;homepage;;;false
+
+
