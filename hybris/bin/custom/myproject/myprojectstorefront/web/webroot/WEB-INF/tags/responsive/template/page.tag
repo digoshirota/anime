@@ -25,18 +25,7 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<div class="branding-mobile hidden-md hidden-lg">
-			<div class="js-mobile-logo">
-				<%--populated by JS acc.navigation--%>
-			</div>
-		</div>
 		<main data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">
-			<spring:theme code="text.skipToContent" var="skipToContent" />
-			<a href="#skip-to-content" class="skiptocontent" data-role="none">${fn:escapeXml(skipToContent)}</a>
-			<spring:theme code="text.skipToNavigation" var="skipToNavigation" />
-			<a href="#skiptonavigation" class="skiptonavigation" data-role="none">${fn:escapeXml(skipToNavigation)}</a>
-
-
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />
 
 
@@ -52,7 +41,5 @@
 
 			<footer:footer />
 		</main>
-
 	</jsp:body>
-
 </template:master>

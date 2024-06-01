@@ -12,3 +12,8 @@
 /hybris/bin/platform
 hybris/bin/custom/myproject/myprojectstorefront/web/node_modules/*
 hybris/bin/custom/myproject/*/jalo/*
+**/.idea/**/
+**/.idea
+**/gensrc/**
+**/myproject/**/test/**
+

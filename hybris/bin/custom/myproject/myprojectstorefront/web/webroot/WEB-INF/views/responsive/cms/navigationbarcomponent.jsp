@@ -4,7 +4,7 @@
 		<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
 		<c:set value="${component.styleClass} ${dropDownLayout}" var="bannerClasses"/>
-
+aqui
 		<li class="${fn:escapeXml(bannerClasses)} nav__links--primary <c:if test="${not empty component.navigationNode.children}">nav__links--primary-has__sub js-enquire-has-sub</c:if>">
 
 			<cms:component component="${component.link}" evaluateRestriction="true" element="span" class="nav__link js_nav__link"/>

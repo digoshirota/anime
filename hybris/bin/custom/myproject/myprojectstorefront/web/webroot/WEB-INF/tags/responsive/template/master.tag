@@ -51,8 +51,6 @@
 
 	<%-- Inject any additional CSS required by the page --%>
 	<jsp:invoke fragment="pageCss"/>
-	<analytics:analytics/>
-	<generatedVariables:generatedVariables/>
 </head>
 
 <body class="${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}">
@@ -60,20 +58,15 @@
 	<%-- Inject the page body here --%>
 	<jsp:doBody/>
 
-
-	<form name="accessiblityForm">
-		<input type="hidden" id="accesibility_refreshScreenReaderBufferField" name="accesibility_refreshScreenReaderBufferField" value=""/>
-	</form>
-	<div id="ariaStatusMsg" class="skip" role="status" aria-relevant="text" aria-live="polite"></div>
-
 	<%-- Load JavaScript required by the site --%>
 	<template:javaScript/>
 	
 	<%-- Inject any additional JavaScript required by the page --%>
-	<jsp:invoke fragment="pageScripts"/>
+
+	<%-- <jsp:invoke fragment="pageScripts"/> --%>
 
 	<%-- Inject CMS Components from addons using the placeholder slot--%>
-	<addonScripts:addonScripts/>
+	<%-- <addonScripts:addonScripts/> --%>
 
 
 </body>

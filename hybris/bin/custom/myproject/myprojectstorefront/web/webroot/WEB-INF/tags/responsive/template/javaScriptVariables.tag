@@ -53,8 +53,8 @@
 			</c:forEach>
 		/*]]>*/
 	</script>
-	<template:javaScriptAddOnsVariables/>
+	<%-- <template:javaScriptAddOnsVariables/> --%>
 	
 	<%-- generated variables from commonVariables.properties --%>
-	<script src="${fn:escapeXml(sharedResourcePath)}/js/generatedVariables.js"></script>
+	<%-- <script src="${fn:escapeXml(sharedResourcePath)}/js/generatedVariables.js"></script> --%>
 	

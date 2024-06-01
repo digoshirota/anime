@@ -12,10 +12,15 @@
 ##Criação de uma nova página
 
 $contentCatalog=electronicsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$version=Online
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
 
 # Language
-$lang=pt
+$lang=en
+
+
 
 # PageTemplate
 INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
@@ -27,5 +32,96 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$l
 
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];homepage[default='false'];approvalStatus(code)[default='unapproved'];defaultPage
 ;;homepage;;;false
+
+
+##Criação do novo header
+
+
+
+# Criação do Logo
+INSERT_UPDATE Media;$contentCV[unique = true] ; code[unique=true]; realfilename; mime; folder(qualifier); @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;; siteLogoAnime; logo.png; image/png; images; $siteResource/logo.png
+#Media: Tipo de item que representa um arquivo de mídia.
+#code: Código único que identifica o item de mídia.
+#realfilename: Nome real do arquivo de mídia.
+#mime: Tipo MIME do arquivo (ex: image/png).
+#folder(qualifier): Pasta onde o arquivo de mídia será armazenado.
+#@media: Caminho para o arquivo de mídia a ser importado.
+
+
+
+
+# Vinculação do Logo ao Header
+INSERT_UPDATE SimpleBannerComponent; uid[unique=true]; name; $picture[lang = $lang]; $contentCV
+; siteLogoSimpleBannerComponent; Site Logo Component; siteLogoAnime;
+#SimpleBannerComponent: Componente de banner simples, é um componente mais usado para imagens.
+#media(code): Código do item de mídia vinculado ao banner. Esse campo faz referencia ao Media png criado acima
+#ou seja é o ID (Code)
+
+
+
+
+
+
+
+
+
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;linkName[lang=$lang];target(code);
+;;homepageLink; Homepage Link; /; Homepage; newWindow;
+;;categoriesLink; Categories Link; /categories; Categories; newWindow;
+;;blogLink; Our Blog Link; /blog; Our Blog; newWindow;
+;;contactLink; Contacts Link; /contacts; Contacts; newWindow;
+
+;; actionLink; Action Link; /categories/action; Ação; newWindow; 
+;; dramaLink; Drama Link; /categories/drama; Drama; newWindow; 
+;; fantasyLink; Fantasy Link; /categories/fantasy; Fantasia; newWindow; 
+;; sportsLink; Sports Link; /categories/sports; Esportes; newWindow;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique = true];$contentCV[unique = true];name;parent(uid,$contentCV);links(uid,$contentCV);&nodeRef;&componentRef;title[lang=$lang];children(uid,$contentCV)
+;headerCMSNavigationNode;;navigation node para header;;homepageLink,blogLink,contactLink;headerCMSNavigationNode;;Root Navigation Node;
+;rootcategoriesNode;; Categories Node; ;categoriesLink; rootcategoriesNode;;Categories Node;
+;categoriesNode;; Categories Node;rootcategoriesNode ; actionLink, dramaLink, fantasyLink, sportsLink;categoriesNode ;;Categories Node sub links;
+
+
+
+
+##navigationNode(&nodeRef) CMSNavigationNode |||  link(uid, $contentCV) CMSLinkComponent
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique = true];navigationNode(&nodeRef);link(uid, $contentCV);
+;;homepageNavigationBarComponent;headerCMSNavigationNode;homepageLink;;
+;;categoriesNavigationBarComponent;rootcategoriesNode;categoriesLink;;
+;;blogNavigationBarComponent;headerCMSNavigationNode;blogLink;;
+;;contactNavigationBarComponent;headerCMSNavigationNode;contactLink;;
+
+
+
+
+##components(uid,$contentCV) NavigationBarComponent
+INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid,$contentCV);&componentRef
+;;headerNavigationBarCollectionComponent;Navigation Bar Collection Component para o menu da plp de aparelhos;homepageNavigationBarComponent,categoriesNavigationBarComponent,blogNavigationBarComponent,contactNavigationBarComponent;
+
+## cmsComponents(uid, $contentCV)
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
+;;headerContentSlot;header Content Slot;siteLogoSimpleBannerComponent,headerNavigationBarCollectionComponent;
+## contentSlot(uid, $contentCV)[unique = true]
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite[default = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPageAnimeTemplate']
+;; headerContentSlotForTemplate; headerPosition; headerContentSlot;;;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

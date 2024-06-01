@@ -6,23 +6,22 @@
 
 <c:choose>
 	<c:when test="${wro4jEnabled}">
-		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(contextPath)}/wro/all_responsive.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(contextPath)}/wro/${fn:escapeXml(themeName)}_responsive.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(contextPath)}/wro/addons_responsive.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(contextPath)}/wro/css_libs.css" />
+		
 	</c:when>
 	<c:otherwise>
 		<%-- Theme CSS files --%>
-		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(themeResourcePath)}/css/style.css"/>
+		<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(contextPath)}/_ui/css/lib/bootstrap.min.css" />
 		<%--  AddOn Common CSS files --%>
-		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
+		<%-- <c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(addOnCommonCss)}"/>
-		</c:forEach>
+		</c:forEach> --%>
 	</c:otherwise>
 </c:choose>
 
 <%--  AddOn Theme CSS files --%>
-<c:forEach items="${addOnThemeCssPaths}" var="addOnThemeCss">
+<%-- <c:forEach items="${addOnThemeCssPaths}" var="addOnThemeCss">
 	<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(addOnThemeCss)}"/>
-</c:forEach>
+</c:forEach> --%>
 
-<cms:previewCSS cmsPageRequestContextData="${cmsPageRequestContextData}" />
+<%-- <cms:previewCSS cmsPageRequestContextData="${cmsPageRequestContextData}" /> --%>
