@@ -22,6 +22,12 @@ module.exports = function (grunt) {
         ],
         tasks: ["sync:syncybase"],
       },
+      modulejs: {
+        files: [
+          "webroot/WEB-INF/_ui-src/responsive/module/**/*.js",
+        ],
+        tasks: ["sync:syncymodule"],
+      },
       jquery: {
         files: ["webroot/WEB-INF/_ui-src/responsive/lib/jquery*.js"],
         tasks: ["sync:syncjquery"],
@@ -69,6 +75,15 @@ module.exports = function (grunt) {
             cwd: "webroot/WEB-INF/_ui-src/responsive/lib/ybase-0.1.0/js/",
             src: "**/*.js",
             dest: "webroot/_ui/responsive/common/js",
+          },
+        ],
+      },
+      syncymodule: {
+        files: [
+          {
+            cwd: "webroot/WEB-INF/_ui-src/responsive/module/",
+            src: "**/*.js",
+            dest: "webroot/_ui/responsive/module",
           },
         ],
       },

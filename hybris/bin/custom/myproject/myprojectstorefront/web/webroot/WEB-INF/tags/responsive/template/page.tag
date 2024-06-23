@@ -1,4 +1,4 @@
-<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true"%>
+<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <%@ attribute name="pageTitle" required="false" rtexprvalue="true"%>
 <%@ attribute name="pageCss" required="false" fragment="true"%>
 <%@ attribute name="pageScripts" required="false" fragment="true"%>
@@ -28,9 +28,6 @@
 		<main data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />
 
-
-			
-			
 			<a id="skip-to-content"></a>
 		
 			<div class="main__inner-wrapper">
@@ -39,7 +36,7 @@
 				<jsp:doBody />
 			</div>
 
-			<footer:footer />
+			<%-- <footer:footer /> --%>
 		</main>
 	</jsp:body>
 </template:master>

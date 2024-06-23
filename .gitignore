@@ -16,4 +16,4 @@ hybris/bin/custom/myproject/*/jalo/*
 **/.idea
 **/gensrc/**
 **/myproject/**/test/**
-
+**/jalo/**

@@ -1,4 +1,4 @@
-<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true" %>
+<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <%@ attribute name="pageTitle" required="false" rtexprvalue="true" %>
 <%@ attribute name="metaDescription" required="false" %>
 <%@ attribute name="metaKeywords" required="false" %>
@@ -53,7 +53,7 @@
 	<jsp:invoke fragment="pageCss"/>
 </head>
 
-<body class="${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}">
+<body class=" ${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}">
 
 	<%-- Inject the page body here --%>
 	<jsp:doBody/>

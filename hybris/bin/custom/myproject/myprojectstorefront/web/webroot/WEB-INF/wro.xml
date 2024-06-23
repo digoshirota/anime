@@ -14,8 +14,15 @@
 		<css>/_ui/responsive/theme-lambda/css/style.css</css>
 	</group>
 
-	<group name="css_libs">
+	<group name="critical">
 		<css>/_ui/css/lib/bootstrap.min.css</css>
+		<css>/_ui/css/lib/swiper.min.css</css>
+	</group>
+	<group name="non-critical">
+		<css>/_ui/responsive/theme-anime/css/style.css</css>
+	</group>
+	<group name="criticalJS">
+		<js>/_ui/responsive/common/lib/swiper.min.js</js>
 	</group>
 
 	<group name="all_responsive">

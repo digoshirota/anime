@@ -34,9 +34,18 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];homepage[default='fa
 ;;homepage;;;false
 
 
+
+
 ##Criação do novo header
 
+$contentCatalog=electronicsContentCatalog
+$version=Online
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
 
+# Language
+$lang=en
 
 # Criação do Logo
 INSERT_UPDATE Media;$contentCV[unique = true] ; code[unique=true]; realfilename; mime; folder(qualifier); @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
@@ -48,12 +57,9 @@ INSERT_UPDATE Media;$contentCV[unique = true] ; code[unique=true]; realfilename;
 #folder(qualifier): Pasta onde o arquivo de mídia será armazenado.
 #@media: Caminho para o arquivo de mídia a ser importado.
 
-
-
-
 # Vinculação do Logo ao Header
 INSERT_UPDATE SimpleBannerComponent; uid[unique=true]; name; $picture[lang = $lang]; $contentCV
-; siteLogoSimpleBannerComponent; Site Logo Component; siteLogoAnime;
+; siteLogoSimpleBannerComponent; Logo Header Anime; siteLogoAnime;
 #SimpleBannerComponent: Componente de banner simples, é um componente mais usado para imagens.
 #media(code): Código do item de mídia vinculado ao banner. Esse campo faz referencia ao Media png criado acima
 #ou seja é o ID (Code)
@@ -106,6 +112,36 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ;
 ## contentSlot(uid, $contentCV)[unique = true]
 INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite[default = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPageAnimeTemplate']
 ;; headerContentSlotForTemplate; headerPosition; headerContentSlot;;;
+
+$contentCatalog=electronicsContentCatalog
+$version=Online
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
+
+# Language
+$lang=en
+
+INSERT_UPDATE Media;$contentCV[unique = true] ; code[unique=true]; realfilename; mime; folder(qualifier); @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;; banner1; hero-1.jpg; image/jpeg; images; $siteResource/hero-1.jpg
+;; banner2; bd-item-1.jpg; image/jpeg; images; $siteResource/bd-item-1.jpg
+;; banner3; bd-item-2.jpg; image/jpeg; images; $siteResource/bd-item-2.jpg
+;; banner4; bd-item-3.jpg; image/jpeg; images; $siteResource/bd-item-3.jpg
+
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink;$picture[lang=$lang];
+;;BannerComponent1;Banner Component 1;"/";banner1
+;;BannerComponent2;Banner Component 2;"/";banner2
+;;BannerComponent3;Banner Component 3;"/";banner3
+;;BannerComponent4;Banner Component 4;"/";banner4
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(uid, $contentCV)
+;;RotatingImagesComponentHomepage;RotatingImagesComponentHomepage;BannerComponent1,BannerComponent2,BannerComponent3,BannerComponent4
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
+;;heroAnimeContentSlot;hero Content Slot;RotatingImagesComponentHomepage;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage-anime'];contentSlot(uid,$contentCV)[unique=true]
+;;heroAnimeContentSlotForPage;heroPosition;;heroAnimeContentSlot
 
 
 

@@ -4,28 +4,17 @@
 
 <%@ taglib prefix="cms" tagdir="/WEB-INF/tags/responsive/template/cms" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template" %>
+<%@ taglib prefix="script" tagdir="/WEB-INF/tags/responsive/template/script" %>
 
 <%-- <template:javaScriptVariables/> --%>
 
 <c:set var="commonResourcePathHtml" value="${fn:escapeXml(commonResourcePath)}"/>
 <c:choose>
 	<c:when test="${wro4jEnabled}">
-	  	<%-- <script src="${fn:escapeXml(contextPath)}/wro/all_responsive.js"></script>
-	  	<script src="${fn:escapeXml(contextPath)}/wro/addons_responsive.js"></script> --%>
+		<script:script />
 	</c:when>
 	<c:otherwise>
-		
-		<%-- Cms Action JavaScript files --%>
-
-		<%-- <c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
-		    <script src="${commonResourcePathHtml}/js/cms/${fn:escapeXml(actionJsFile)}"></script>
-		</c:forEach> --%>
-
-		<%-- AddOn JavaScript files --%>
-		<%-- <c:forEach items="${addOnJavaScriptPaths}" var="addOnJavaScript">
-		    <script src="${fn:escapeXml(addOnJavaScript)}"></script>
-		</c:forEach> --%>
-
+		<script:script />
 	</c:otherwise>
 </c:choose>
 
