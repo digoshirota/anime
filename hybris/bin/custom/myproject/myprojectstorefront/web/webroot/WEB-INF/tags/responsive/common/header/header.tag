@@ -53,9 +53,5 @@
 			</div>
 		</div>
 	</header 
-	
-	
-	
-	
 </cms:globalSlot>
 									
