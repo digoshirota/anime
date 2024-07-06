@@ -13,49 +13,7 @@
 
 
 <!-- Hero Section Begin -->
-    <%-- <section class="hero">
-        <div class="container swiper">
-            <div class="hero__slider owl-carousel swiper-wrapper">
-                <div class="hero__items set-bg swiper-slide" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg swiper-slide" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg swiper-slide" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --%>
-    <cms:globalSlot uid="heroAnimeContentSlot" var="hero" limit="1">
+    <%-- <cms:globalSlot uid="heroAnimeContentSlot" var="hero" limit="1">
             <div class="container">
                 <div class="swiper ">
                     <div class="swiper-wrapper">
@@ -73,10 +31,7 @@
                     <div class="swiper-button-next"></div>
                 </div>
             </div>
-            
-        
-    
-    </cms:globalSlot>
+    </cms:globalSlot> --%>
     <!-- Hero Section End -->
 
 

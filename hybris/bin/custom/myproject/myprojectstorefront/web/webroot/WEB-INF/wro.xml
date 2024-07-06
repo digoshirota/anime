@@ -6,14 +6,6 @@
 
 	<import>classpath:wro_addons.xml</import>
 
-	<group name="alpha_responsive">
-		<css>/_ui/responsive/theme-alpha/css/style.css</css>
-	</group>
-
-	<group name="lambda_responsive">
-		<css>/_ui/responsive/theme-lambda/css/style.css</css>
-	</group>
-
 	<group name="critical">
 		<css>/_ui/css/lib/bootstrap.min.css</css>
 		<css>/_ui/css/lib/swiper.min.css</css>

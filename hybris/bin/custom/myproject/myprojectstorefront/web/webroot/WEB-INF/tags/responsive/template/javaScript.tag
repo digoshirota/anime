@@ -4,19 +4,13 @@
 
 <%@ taglib prefix="cms" tagdir="/WEB-INF/tags/responsive/template/cms" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template" %>
-<%@ taglib prefix="script" tagdir="/WEB-INF/tags/responsive/template/script" %>
-
-<%-- <template:javaScriptVariables/> --%>
-
-<c:set var="commonResourcePathHtml" value="${fn:escapeXml(commonResourcePath)}"/>
-<c:choose>
-	<c:when test="${wro4jEnabled}">
-		<script:script />
-	</c:when>
-	<c:otherwise>
-		<script:script />
-	</c:otherwise>
-</c:choose>
+<%@ taglib prefix="scripts" tagdir="/WEB-INF/tags/responsive/template/script" %>
 
 
-<cms:previewJS cmsPageRequestContextData="${cmsPageRequestContextData}" />
+<scripts:scripts wro="${wro4jEnabled}" />
+
+
+	
+
+
+

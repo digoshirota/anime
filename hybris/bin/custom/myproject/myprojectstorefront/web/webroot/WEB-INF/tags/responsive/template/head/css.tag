@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="head" tagdir="/WEB-INF/tags/responsive/template/head" %>
-<%@ attribute name="local" required="true" %>
+<%@ attribute name="wro" required="true" %>
 
 <c:set var="csslib" value="${['critical','non-critical']}" />
 <c:set var="jslib" value="${['criticalJS']}" />
+<c:set var="jsmodule" value="${['home-module']}" />
 
 <c:set var="localLib" value="${['critical']}" />
 <c:set var="localCss" value="${['style']}" />
@@ -14,9 +15,9 @@
 <head:criticalInlineCss />
 
 <c:choose>
-	<c:when test="${local}">
+	<c:when test="${wro}">
 		<c:forEach var="fragment" items="${csslib}">
-		<link rel="preload" href="${fn:escapeXml(contextPath)}/wro/${fragment}.css" as="style">
+			<link rel="preload" href="${fn:escapeXml(contextPath)}/wro/${fragment}.css" as="style">
 		</c:forEach>
 		<c:forEach var="fragment" items="${jslib}">
 			<link rel="preload" href="${fn:escapeXml(contextPath)}/wro/${fragment}.js" as="script">
