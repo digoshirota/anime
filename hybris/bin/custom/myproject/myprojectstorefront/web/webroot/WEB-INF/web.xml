@@ -48,6 +48,16 @@
 	    <filter-name>WebResourceOptimizer</filter-name>
 	    <url-pattern>/wro/*</url-pattern>
 	</filter-mapping>
+
+	<filter>
+		<filter-name>etagFilter</filter-name>
+		<filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>etagFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- resource filter -->
 	<filter>
 		<description>

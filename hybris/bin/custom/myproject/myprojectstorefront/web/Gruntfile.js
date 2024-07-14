@@ -9,6 +9,7 @@ module.exports = function (grunt) {
           "webroot/WEB-INF/_ui-src/shared/less/generatedVariables.less",
           "webroot/WEB-INF/_ui-src/responsive/lib/ybase-*/less/*",
           "webroot/WEB-INF/_ui-src/**/themes/**/less/*.less",
+          "webroot/WEB-INF/_ui-src/**/themes/**/less/**/*.less",
         ],
         tasks: ["less"],
       },

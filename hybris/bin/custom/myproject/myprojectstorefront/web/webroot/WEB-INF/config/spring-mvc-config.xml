@@ -26,6 +26,8 @@
 	<alias name="jaxb2RootElementHttpMessageConverter" alias="jaxbMessageConverter" />
 	<bean id="jaxb2RootElementHttpMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
 
+	<bean id="etagFilter" class="org.springframework.web.filter.ShallowEtagHeaderFilter"/>
+
 	<!-- activates annotation driven binding -->
 	<mvc:annotation-driven ignore-default-model-on-redirect="true" validator="validator">
 		<mvc:message-converters>

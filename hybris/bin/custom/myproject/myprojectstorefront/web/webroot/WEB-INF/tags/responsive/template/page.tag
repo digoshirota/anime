@@ -36,7 +36,7 @@
 				<jsp:doBody />
 			</div>
 
-			<%-- <footer:footer /> --%>
+			<footer:footer />
 		</main>
 	</jsp:body>
 </template:master>

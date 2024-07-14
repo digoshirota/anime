@@ -366,7 +366,7 @@
                 			
             </copy>
             			
-            <apply dir="${ext.myprojectstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/themes/" executable="java" failonerror="true" force="true" parallel="false">
+            <apply dir="${ext.myprojectstorefront.path}/web/webroot/WEB-INF/_ui-src/responsive/themes/" executable="java" failonerror="alse" force="true" parallel="false">
                 				
                 <!-- Give the input bundle of less files-->
                 				
@@ -1027,7 +1027,7 @@
         		
         <sequential>
             			
-            <myprojectstorefront_lesscss/>
+            <!-- <myprojectstorefront_lesscss/> -->
             			
             <myprojectstorefront_movelibs/>
             		

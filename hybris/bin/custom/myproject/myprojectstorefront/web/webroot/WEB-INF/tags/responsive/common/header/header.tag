@@ -9,9 +9,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 
-
-
-  
+<%-- globalSlot irá chamar ContentSlotForTemplate  criando anteriormente headerContentSlot --%>
 <cms:globalSlot uid="headerContentSlot" var="header" limit="1">
 	<header class="header">
 		<div class="container">
@@ -19,6 +17,7 @@
 				<div class="col-lg-2">
                     <div class="header__logo">
 						<a href="/">
+                            <%-- componente customizado do logo SimpleBannerComponent - siteLogoSimpleBannerComponent --%>
 							<img title="${fn:escapeXml(contentSlot.cmsComponents[0].media.altText)}" alt="${fn:escapeXml(contentSlot.cmsComponents[0].media.altText)}"
 							src="${fn:escapeXml(contentSlot.cmsComponents[0].media.url)}">
 						</a>	

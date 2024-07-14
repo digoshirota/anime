@@ -36,10 +36,10 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];homepage[default='fa
 
 
 
-##Criação do novo header
+## AULA - Criação do novo header
 
 $contentCatalog=electronicsContentCatalog
-$version=Online
+$version=Staged
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
 $picture=media(code, $contentCV);
 $siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
@@ -72,27 +72,31 @@ INSERT_UPDATE SimpleBannerComponent; uid[unique=true]; name; $picture[lang = $la
 
 
 
-
+##  Criação dos links do menu
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;linkName[lang=$lang];target(code);
-;;homepageLink; Homepage Link; /; Homepage; newWindow;
+# Links do menu principal
+;;homepageLink; Homepage Link; /myprojectstorefront/electronics/en/; Homepage; newWindow;
 ;;categoriesLink; Categories Link; /categories; Categories; newWindow;
 ;;blogLink; Our Blog Link; /blog; Our Blog; newWindow;
 ;;contactLink; Contacts Link; /contacts; Contacts; newWindow;
-
+# Links do sub-menu Categories
 ;; actionLink; Action Link; /categories/action; Ação; newWindow; 
 ;; dramaLink; Drama Link; /categories/drama; Drama; newWindow; 
 ;; fantasyLink; Fantasy Link; /categories/fantasy; Fantasia; newWindow; 
 ;; sportsLink; Sports Link; /categories/sports; Esportes; newWindow;
 
-INSERT_UPDATE CMSNavigationNode;uid[unique = true];$contentCV[unique = true];name;parent(uid,$contentCV);links(uid,$contentCV);&nodeRef;&componentRef;title[lang=$lang];children(uid,$contentCV)
-;headerCMSNavigationNode;;navigation node para header;;homepageLink,blogLink,contactLink;headerCMSNavigationNode;;Root Navigation Node;
-;rootcategoriesNode;; Categories Node; ;categoriesLink; rootcategoriesNode;;Categories Node;
-;categoriesNode;; Categories Node;rootcategoriesNode ; actionLink, dramaLink, fantasyLink, sportsLink;categoriesNode ;;Categories Node sub links;
+## Criação dos nós de navegação
+INSERT_UPDATE CMSNavigationNode;uid[unique = true];$contentCV[unique = true];name;parent(uid,$contentCV);links(uid,$contentCV);&nodeRef;title[lang=$lang]
+# Criação dos nós de navegação do menu principal
+;headerCMSNavigationNode;;navigation node para header;;homepageLink,blogLink,contactLink;headerCMSNavigationNode;Root Navigation Node
+# Criação dos nós de navegação do sub-menu Categories
+;rootcategoriesNode;; Categories Node; ;categoriesLink; rootcategoriesNode;Categories Node;
+;categoriesNode;; Categories Node;rootcategoriesNode ; actionLink, dramaLink, fantasyLink, sportsLink;categoriesNode;Categories Node sub links
 
 
 
 
-##navigationNode(&nodeRef) CMSNavigationNode |||  link(uid, $contentCV) CMSLinkComponent
+## Criação do componente de navegação
 INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique = true];navigationNode(&nodeRef);link(uid, $contentCV);
 ;;homepageNavigationBarComponent;headerCMSNavigationNode;homepageLink;;
 ;;categoriesNavigationBarComponent;rootcategoriesNode;categoriesLink;;
@@ -102,16 +106,19 @@ INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique = true];
 
 
 
-##components(uid,$contentCV) NavigationBarComponent
+## Criação do componente de navegação, que é uma coleção de NavigationBarComponent
 INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid,$contentCV);&componentRef
 ;;headerNavigationBarCollectionComponent;Navigation Bar Collection Component para o menu da plp de aparelhos;homepageNavigationBarComponent,categoriesNavigationBarComponent,blogNavigationBarComponent,contactNavigationBarComponent;
 
-## cmsComponents(uid, $contentCV)
+## Criação do ContentSlot que irá ficar o Header
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
 ;;headerContentSlot;header Content Slot;siteLogoSimpleBannerComponent,headerNavigationBarCollectionComponent;
-## contentSlot(uid, $contentCV)[unique = true]
+## Criação do ContentSlotForTemplate que irá ficar o Header no Template da homepage
 INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite[default = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPageAnimeTemplate']
 ;; headerContentSlotForTemplate; headerPosition; headerContentSlot;;;
+
+
+
 
 $contentCatalog=electronicsContentCatalog
 $version=Online
@@ -119,29 +126,188 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 $picture=media(code, $contentCV);
 $siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
 
+
+
+
+
 # Language
 $lang=en
 
+## Criação do carousel de banners
+
+# Criando as imagens
 INSERT_UPDATE Media;$contentCV[unique = true] ; code[unique=true]; realfilename; mime; folder(qualifier); @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 ;; banner1; hero-1.jpg; image/jpeg; images; $siteResource/hero-1.jpg
 ;; banner2; bd-item-1.jpg; image/jpeg; images; $siteResource/bd-item-1.jpg
 ;; banner3; bd-item-2.jpg; image/jpeg; images; $siteResource/bd-item-2.jpg
 ;; banner4; bd-item-3.jpg; image/jpeg; images; $siteResource/bd-item-3.jpg
 
+# Criando os banners que guarda as imagens criadas
 INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; urlLink;$picture[lang=$lang];
 ;;BannerComponent1;Banner Component 1;"/";banner1
 ;;BannerComponent2;Banner Component 2;"/";banner2
 ;;BannerComponent3;Banner Component 3;"/";banner3
 ;;BannerComponent4;Banner Component 4;"/";banner4
 
+# Criando o carousel de banner criado acima
 INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(uid, $contentCV)
 ;;RotatingImagesComponentHomepage;RotatingImagesComponentHomepage;BannerComponent1,BannerComponent2,BannerComponent3,BannerComponent4
 
+# Criando o Slot ira o componente de carousel
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
 ;;heroAnimeContentSlot;hero Content Slot;RotatingImagesComponentHomepage;
 
+# Criando o Slot ira ficar na homepage do site Anime
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage-anime'];contentSlot(uid,$contentCV)[unique=true]
 ;;heroAnimeContentSlotForPage;heroPosition;;heroAnimeContentSlot
+
+
+
+
+
+##Criação de uma vitrine de produtos
+$contentCatalog=electronicsContentCatalog
+$version=Online
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
+$lang=en
+$productCatalog=electronicsProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$picture2=picture(code,$productCV)
+
+# Criando as imagens
+INSERT_UPDATE Media;$productCV[unique = true] ; code[unique=true]; realfilename; mime; folder(qualifier); @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+;; popular1; popular-1.jpg; image/jpeg; images; $siteResource/popular-1.jpg
+;; popular2; popular-2.jpg; image/jpeg; images; $siteResource/popular-2.jpg
+;; popular3; popular-3.jpg; image/jpeg; images; $siteResource/popular-3.jpg
+;; popular4; popular-4.jpg; image/jpeg; images; $siteResource/popular-4.jpg
+;; popular5; popular-5.jpg; image/jpeg; images; $siteResource/popular-5.jpg
+;; popular6; popular-6.jpg; image/jpeg; images; $siteResource/popular-6.jpg
+;; trend1; trend-1.jpg; image/jpeg; images; $siteResource/trend-1.jpg
+;; trend2; trend-2.jpg; image/jpeg; images; $siteResource/trend-2.jpg
+;; trend3; trend-3.jpg; image/jpeg; images; $siteResource/trend-3.jpg
+;; trend4; trend-4.jpg; image/jpeg; images; $siteResource/trend-4.jpg
+;; trend5; trend-5.jpg; image/jpeg; images; $siteResource/trend-5.jpg
+;; trend6; trend-6.jpg; image/jpeg; images; $siteResource/trend-6.jpg
+
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];name[lang=en];description[lang=en];$productCV;$picture2
+;779842;Boruto: Naruto Next Generations;An action figure of Naruto Uzumaki from the anime series Naruto.;;popular1
+;779848;Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien;A coffee mug featuring characters from One Piece.;;popular2
+;834954;Shingeki no Kyojin Season 3 Part 2;A T-shirt with a design from Attack on Titan.;;popular3
+;834955;Fullmetal Alchemist: Brotherhood;;;popular4
+;266685;Shiratorizawa Gakuen Koukou;;;popular5
+;289540;Code Geass: Hangyaku no Lelouch R2;;;popular6
+;791635;Sen to Chihiro no Kamikakushi;;;trend1
+;1099413;Kizumonogatari III: Reiket su-hen;;;trend2
+;779864;Shirogane Tamashii hen Kouhan sen;;;trend3
+;779866;Rurouni Kenshin: Meiji Kenkaku Romantan;;;trend4
+;779868;Mushishi Zoku Shou 2nd Season;;;trend5
+;1291399;Monogatari Series: Second Season;;;trend6
+
+# Criando  o componente de carousel produtos
+INSERT_UPDATE ProductCarouselComponent;uid[unique=true];name;$contentCV[unique=true];products(code,$productCV)
+;homepageAnimeProductCarouselComponent;homepageAnimeProductCarouselComponent;;779842,779848,834954,834955,266685,289540,791635,1099413,779864,779866,779868,1291399
+
+# Criando o Slot ira o componente de carousel
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
+;;homepageAnimeProductCarouselComponentContentSlot;homepageAnimeProductCarouselComponent;homepageAnimeProductCarouselComponent;
+
+# Criando o Slot ira ficar na homepage do site Anime
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage-anime'];contentSlot(uid,$contentCV)[unique=true]
+;;homepageAnimeProductCarouselComponentContentSlotContentSlotForPage;homepageAnimeProductCarouselComponentPosition;;homepageAnimeProductCarouselComponentContentSlot
+
+
+$contentCatalog=electronicsContentCatalog
+$version=Online
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.hybris.myproject.initialdata.setup.InitialDataSystemSetup&/myprojectinitialdata/import/coredata/animeImage
+$lang=en
+$productCatalog=electronicsProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$picture2=picture(code,$productCV)
+##Criação do Footer
+# CMS Footer Component
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];
+;;animeFooterComponent;
+
+## Criação do ContentSlot que irá ficar o Header
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
+;;animeFooterComponentContentSlot;animeFooterComponentContentSlot;animeFooterComponent,siteLogoSimpleBannerComponent,headerNavigationBarCollectionComponent;
+## Criação do ContentSlotForTemplate que irá ficar o Header no Template da homepage
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite[default = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPageAnimeTemplate']
+;; animeFooterComponentContentSlotForTemplate; animeFooterPosition; animeFooterComponentContentSlot;;;
+
+
+
+
+
+# Macros / Replacement Parameter definitions
+$productCatalog=AnimeProductCatalog
+$version=Staged
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$sourceContentCV = sourceVersion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default='$productCatalog:Staged']
+$targetContentCV = targetVersion(catalog(id[default=$productCatalog]), version[default='Online'])[unique=true, default='$productCatalog:Online']
+
+INSERT_UPDATE CatalogVersionSyncJob; code[unique = true]  ;$sourceContentCV; $targetContentCV
+; sync $productCatalog:Staged->Online ; ;
+# Define the catalog
+INSERT_UPDATE Catalog;id[unique=true];name[lang=en];
+;AnimeProductCatalog;Anime Products Catalog;
+
+# Define catalog versions
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active;languages(isocode)
+;AnimeProductCatalog;Staged;false;en,pt
+;AnimeProductCatalog;Online;true;en,pt
+
+# Define categories
+INSERT_UPDATE Category;code[unique=true];name[lang=en];description[lang=en];$catalogVersion
+;anime;;;
+;movie;;;
+;action;Figures;Action figures from various anime series.;
+;drama;Clothing;Anime themed clothing and accessories.;
+;sports;;;
+
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];name[lang=en];description[lang=en];$catalogVersion;$supercategories;$approved
+;0001;Boruto: Naruto Next Generations;An action figure of Naruto Uzumaki from the anime series Naruto.;;anime,action;
+;0002;Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien;A coffee mug featuring characters from One Piece.;;movie,action;
+;0003;Shingeki no Kyojin Season 3 Part 2;A T-shirt with a design from Attack on Titan.;;anime,drama;
+;0004;Fullmetal Alchemist: Brotherhood;;;anime,action;
+;0005;Shiratorizawa Gakuen Koukou;;;anime,action;
+;0006;Code Geass: Hangyaku no Lelouch R2;;;anime,sports;
+;0007;Sen to Chihiro no Kamikakushi;;;movie,drama;
+;0008;Kizumonogatari III: Reiket su-hen;;;movie,sports;
+;0009;Shirogane Tamashii hen Kouhan sen;;;anime,drama;
+;0010;Rurouni Kenshin: Meiji Kenkaku Romantan;;;anime,action;
+;0011;Mushishi Zoku Shou 2nd Season;;;anime,drama;
+;0012;Monogatari Series: Second Season;;;anime,sports;
+
+$contentCatalog=electronicsContentCatalog
+$version=Staged
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+# Criação de componentes de CMS para ProductGridComponent
+
+INSERT_UPDATE ProductCarouselComponent;uid[unique=true];name;$contentCV[unique=true]
+;homepageAnimeProductCarouselComponent;action;
+
+# Criando o Slot ira o componente de carousel
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name ; cmsComponents(uid, $contentCV); active[default = true]
+;;homepageAnimeProductCarouselComponentContentSlot;homepageAnimeProductCarouselComponent;homepageAnimeProductCarouselComponent;
+
+# Criando o Slot ira ficar na homepage do site Anime
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage-anime'];contentSlot(uid,$contentCV)[unique=true]
+;;homepageAnimeProductCarouselComponentContentSlotContentSlotForPage;homepageAnimeProductCarouselComponentPosition;;homepageAnimeProductCarouselComponentContentSlot
+
+
+
 
 
 

@@ -7,14 +7,14 @@
 	<import>classpath:wro_addons.xml</import>
 
 	<group name="critical">
-		<css>/_ui/css/lib/bootstrap.min.css</css>
-		<css>/_ui/css/lib/swiper.min.css</css>
+		<css minimize="true">/_ui/responsive/theme-anime/css/bootstrap.min.css</css>
+		<css minimize="true">/_ui/responsive/theme-anime/css/swiper.min.css</css>
 	</group>
 	<group name="non-critical">
-		<css>/_ui/responsive/theme-anime/css/style.css</css>
+		<css minimize="true">/_ui/responsive/theme-anime/css/style.css</css>
 	</group>
 	<group name="criticalJS">
-		<js>/_ui/responsive/common/lib/swiper.min.js</js>
+		<js minimize="true">/_ui/responsive/common/lib/swiper.min.js</js>
 	</group>
 
 	<group name="all_responsive">

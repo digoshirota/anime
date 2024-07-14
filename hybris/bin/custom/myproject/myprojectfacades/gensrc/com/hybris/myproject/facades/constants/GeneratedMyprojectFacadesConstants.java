@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 23 de jun. de 2024 16:55:50                 ---
+ * --- Generated at 13 de jul. de 2024 23:11:14                 ---
  * ----------------------------------------------------------------
  */
 package com.hybris.myproject.facades.constants;
